@@ -27,7 +27,7 @@ function App() {
     try {
       const fetchedMovies = await fetchMovies(query);
       if (fetchedMovies.length === 0) {
-        toast("No movies found for your request.");
+        toast.error("No movies found for your request.");
       }
       setMovies(fetchedMovies);
     } catch {
@@ -39,7 +39,7 @@ function App() {
 
   return (
     <>
-      <Toaster position="top-right" />
+      <Toaster position="top-center" />
       <SearchBar onSubmit={handleSearch} />
       {loading && <Loader />}
       {error && <ErrorMessage />}
