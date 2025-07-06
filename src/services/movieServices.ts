@@ -13,6 +13,7 @@ export const fetchMovies = async (query: string): Promise<Movie[]> => {
     params: { query },
     headers: {
       Authorization: `Bearer ${API_TOKEN}`,
+      Accept: "application/json",
     },
   });
   return response.data.results;
