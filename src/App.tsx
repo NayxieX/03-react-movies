@@ -4,7 +4,7 @@ import MovieGrid from "./components/MovieGrid/MovieGrid";
 import MovieModal from "./components/MovieModal/MovieModal";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
-import type { Movie } from "../types/movies";
+import type { Movie } from "./types/movies";
 import { fetchMovies } from "./services/movieServices";
 import toast, { Toaster } from "react-hot-toast";
 
