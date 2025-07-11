@@ -14,32 +14,30 @@ function App() {
   const [error, setError] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
-const handleSubmit = async (formData: FormData) => {
-  const query = formData.get("query") as string;
+  const handleSubmit = async (query: string) => {
+    if (!query) return;
 
-  if (!query) return;
+    setLoading(true);
+    setError(false);
+    setMovies([]);
 
-  setLoading(true);
-  setError(false);
-  setMovies([]);
-
-  try {
-    const fetchedMovies = await fetchMovies(query);
-    if (fetchedMovies.length === 0) {
-      toast.error("No movies found for your request.");
+    try {
+      const fetchedMovies = await fetchMovies(query);
+      if (fetchedMovies.length === 0) {
+        toast.error("No movies found for your request.");
+      }
+      setMovies(fetchedMovies);
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
     }
-    setMovies(fetchedMovies);
-  } catch {
-    setError(true);
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   return (
     <>
       <Toaster position="top-center" />
-      <SearchBar action={handleSubmit} />
+      <SearchBar onSubmit={handleSubmit} />
       {loading && <Loader />}
       {error && <ErrorMessage />}
       {!loading && !error && movies.length > 0 && (
